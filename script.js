@@ -137,6 +137,23 @@ function drawField()
     ctx.stroke();
 }
 
+function newRound()
+{
+	winStatus = 0;
+	currentField = [[0,0,0],[0,0,0],[0,0,0]];
+	drawField();
+}
+
+function reset()
+{
+    score = [0,0];
+    firstPlayerCount.innerHTML = 0;
+    secondPlayerCount.innerHTML = 0;
+    turn = true;
+    currentTurn.innerHTML = "первый игрок - X";
+    newRound();
+}
+
 function canvasClickOn(event)
 {
 	let canvas = document.getElementById("ticTacToe");
