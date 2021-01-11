@@ -33,3 +33,24 @@ function drawField()
     ctx.lineTo(canvas.width, canvas.height/3*2); 
     ctx.stroke();
 }
+
+function canvasClickOn(event)
+{
+	let canvas = document.getElementById("ticTacToe");
+	let target = canvas.getBoundingClientRect();
+
+    let mouse_coords = 
+    {
+        x: event.clientX - target.left, 
+        y: event.clientY - target.top
+    }
+
+	let i = Math.ceil(mouse_coords.x / (canvas.scrollWidth / 3) %3) - 1;
+    let j = Math.ceil(mouse_coords.y / (canvas.scrollHeight / 3) %3) - 1;
+
+    if (!currentField[j][i] && !winStatus) 
+    {
+		currentField[j][i] = (turn)?"X":"0";
+		drawXO( i, j);
+	}
+}
