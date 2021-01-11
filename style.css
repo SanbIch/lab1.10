@@ -1,0 +1,51 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body 
+{
+	font-family: 'Arial', sans-serif;
+	font-size: 25px;
+	background-color: rgb(245, 245, 245);
+}
+body main h1 
+{
+	font-weight: 600;
+	font-size: 3em;
+	text-align: center;
+}
+body main h2
+{
+	font-weight: bold;
+	text-align: center;
+	font-size: 3rem;
+	margin-top: 20px;
+}
+body main h4 
+{
+	text-align: center;
+}
+body main #turnContainer #turn
+{
+	text-align: center;
+	margin-top: -20px;
+}
+body main #tictactoeContainer 
+{
+	display: block;
+	margin: 1% auto;
+	width: 25%;
+}
+body main #tictactoeContainer #ticTacToe 
+{
+	width: 100%;
+	cursor: pointer;
+}
+body main #tictactoeContainer #btns{
+	margin-top: 3%;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
