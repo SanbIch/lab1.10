@@ -13,6 +13,53 @@ let currentTurn = document.getElementById("turn");
 const winX = ["X", "X", "X"];
 const win0 = ["0", "0", "0"];
 
+function drawO(x, y) 
+{
+    x += 250;
+    y -= 300;
+    let r = 250;
+    ctx.beginPath();
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 80;
+    ctx.arc(x, y, r, 2 * Math.PI, false);
+    ctx.stroke();
+}
+
+function drawX(x, y) 
+{
+    let num = 500;
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 80;
+
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x + num, y - num);
+    ctx.moveTo(x + num, y);
+    ctx.lineTo(x, y - num);
+    ctx.stroke();
+}
+
+function drawXO( i, j)
+{
+    switch(currentField[j][i]) 
+    {
+        case "X":
+            drawX(i*700+100, j*700+600);
+            break;
+        case "0":
+            drawO(i*700+100, j*700+650);
+            break;
+    }
+	checkWinStatus();
+
+    if (winStatus == 0) 
+    {
+        turn = !turn;
+		if (turn) currentTurn.innerHTML="первый игрок - X";
+		else currentTurn.innerHTML="второй игрок - O";
+	}
+}
+
 function drawField() 
 {
 	let canvas = document.getElementById("ticTacToe");
