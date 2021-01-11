@@ -13,6 +13,62 @@ let currentTurn = document.getElementById("turn");
 const winX = ["X", "X", "X"];
 const win0 = ["0", "0", "0"];
 
+function checkWinStatus() {
+    let bool = false;
+    for (let i = 0; i < 3; i++)
+    {
+        for(let j = 0; j < 3; j++)
+        {
+            if (currentField[i][j] === 0) bool = true;
+        }
+    }
+    if (bool === true) winStatus = 0;
+    else winStatus = 3;
+    
+    let currentFieldCols = [];
+    let currentFieldDiag = [
+        [currentField[0][0], currentField[1][1], currentField[2][2]],
+        [currentField[0][2], currentField[1][1], currentField[2][0]]
+    ];
+    for (let i=0; i<3; i++) 
+    {
+        currentFieldCols.push([currentField[0][i], currentField[1][i], currentField[2][i]]);
+		if (_.isEqual(currentField[i], winX) || _.isEqual(currentField[i], win0)) winStatus = (currentField[i][0]=="X") ? 1 : 2;
+		else if (_.isEqual(currentFieldCols[i], winX) || _.isEqual(currentFieldCols[i], win0)) winStatus = (currentField[0][i]=="X") ? 1 : 2;
+    }
+    for (let i=0; i<2; i++)
+    {
+        if (_.isEqual(currentFieldDiag[i], winX) || _.isEqual(currentFieldDiag[i], win0)) winStatus=(currentField[1][1]=="X")?1:2;
+    }
+    switch(winStatus)
+    {
+        case 0:
+            break;
+        case 1:
+            ctx.fillStyle = "rgba(255,255,255,0.7)";
+            ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            score[winStatus - 1]++;
+            firstPlayerCount.innerHTML = score[winStatus - 1];
+            ctx.fillStyle = "black";
+            ctx.fillText("выиграл X", 200, 1150);
+            break;
+        case 2: 
+            ctx.fillStyle = "rgba(255,255,255,0.7)";
+            ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            score[winStatus - 1]++;
+            secondPlayerCount.innerHTML = score[winStatus - 1];
+            ctx.fillStyle = "black";
+            ctx.fillText("выиграл O", 200, 1150);
+            break;
+        case 3:
+            ctx.fillStyle = "rgba(255,255,255,0.7)";
+            ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            ctx.fillStyle = "black";
+            ctx.fillText("Ничья", 600, 1150);
+            break;
+    }
+}
+
 function drawO(x, y) 
 {
     x += 250;
